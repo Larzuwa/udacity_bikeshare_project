@@ -8,9 +8,9 @@ Udacity's bikeshare project
 Project for the Python lesson of the nanodegree 'Programming for Data Science with Python' from Udacity
 
 ### Files used
-bikeshare.py
-csv data files (not included)
-.gitignore
+   * bikeshare.py
+   * csv data files (not included)
+   * .gitignore
 
 ### Credits
 Some of the websites used for help to develop this project:
