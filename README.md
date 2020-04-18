@@ -1,5 +1,5 @@
 ### Date created
-Created on the 18th of April 2020
+Created on Saturday the 18th of April 2020
 
 ### Project Title
 Udacity's bikeshare project
