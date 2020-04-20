@@ -1,5 +1,6 @@
 #### bikeshare project for Udacity's Course
 #### Created on the 18th of April 2020
+#### v2.0 - modified on the 19th of April 2020
 
 ### Author: Laura
 
@@ -42,7 +43,7 @@ def get_filters():
     day = ""
     while day not in DAY_SELECTION:
         day = input("\nFor which day do you want to display the information?"
-                      "\nEnter the week's day name or alternatively enter 'all'\n>")strip().lower()
+                      "\nEnter the week's day name or alternatively enter 'all'\n>").strip().lower()
 
 
     print('-'*40)
@@ -202,21 +203,65 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def raw_data(df):
+    """Display 5 line of sorted raw data each time."""
+
+    print("\nYou opted to view raw data.")
+
+    # Use pandas dataframe head property to loop and display only 5 rows
+    # of information while prompting the user to continue displaying information
+    while True:
+        print(df.head())
+        selection = input("\n\nDo you want to keep printing Raw Data?"
+                  "\nEnter 'Yes' or 'No':\n").strip().lower()
+
+        if selection == 'yes':
+            continue
+        else:
+            break
 
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
-        time_stats(df.head())
-        station_stats(df.head())
-        trip_duration_stats(df.head())
-        user_stats(df.head())
+        #Options for the user to choose how to display the inforamtion
+        options = ['time', 'station', 'duration', 'users', 'raw', 'all', 'exit']
+        select_data = ""
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        # Loop until a correct selection has been made
+        while select_data not in options:
+            select_data = input("\nPlease select the information you would "
+                                 "like to display:\n\n"
+                                 "'Time' to display Time Stats\n"
+                                 "'Station' to display Station Stats\n"
+                                 "'Duration' to display Trip Duration Stats\n"
+                                 "'Users' to display User Stats\n"
+                                 "'Raw' to display Raw Data\n"
+                                 "'All' to display all the information\n"
+                                 "'Exit' to Restart the aplication\n\n>").strip().lower()
+            if select_data == 'time':
+                time_stats(df)
+            elif select_data == 'station':
+                station_stats(df)
+            elif select_data == 'duration':
+                trip_duration_stats(df)
+            elif select_data == 'users':
+                user_stats(df)
+            elif select_data == 'raw':
+                raw_data(df)
+            elif select_data == 'all':
+                time_stats(df)
+                station_stats(df)
+                trip_duration_stats(df)
+                user_stats(df)
+            elif select_data == 'exit':
+                break
+
+        restart = input("\nWould you like to exit the program? "
+                        "Enter 'Yes' or 'No'\n").strip().lower()
+        if restart == 'yes':
             break
-
 
 if __name__ == "__main__":
 	main()
